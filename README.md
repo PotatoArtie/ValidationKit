@@ -17,7 +17,7 @@
 
 ## Usage 
 
-- Use {String}.isValidEmail() 
+### Use {String}.isValidEmail() 
 설명 : 문자열이 이메일 형식이 맞는지 확인합니다.  
 ``` swift 
     [요청]
@@ -27,27 +27,29 @@
     true
 ```
 
-- Use 커스텀 정규식 생성해서 유효성 검사하기 
 
-<< 옵션 설명 >>
+### Use 커스텀 정규식 생성해서 유효성 검사하기 
+
+ [옵션 설명]
 ``` swift
     .required([.english, .number, , .korean, .specialSymbols]) // 필수로 포함되어야하는 설정
-     영어, 숫자, 한글, 특수문자 4가지 옵션을 제공합니다.
+     //영어, 숫자, 한글, 특수문자 4가지 옵션을 제공합니다.
 ```
 ``` swift
     .setLength(min: Int, max: Int) // 최소 최대 글자
 ```
 ``` swift
     .setSpecialCharacter(#",<.>\/?;:'"\[{\]}`~₩!@#$%^&*()-_=+\|"#) // 특수문자 설정
-    #""# 포맷형식으로 특수문자열을 전달합니다. 예시를 꼭 참고해주세요.
+    //#""# 포맷형식으로 특수문자열을 전달합니다. 예시를 꼭 참고해주세요.
 ```
 ``` swift
     .setRegex([.english, .number, , .korean, .specialSymbols]) // 포함되어야하는 조건
-    영어, 숫자, 한글, 특수문자 4가지 옵션을 제공합니다.
+    //영어, 숫자, 한글, 특수문자 4가지 옵션을 제공합니다.
 ```
 ``` swift
     .setLogOption(.verbose) // 로그레벨
 ```
+
 ### 예시 조건 
 1.필수로 포함되어야하는 조건은 영어, 숫자, 특수문자
 2.입력받을 문자열의 길이의 최소길이는 8, 최대길이는 20 으로 설정
@@ -57,19 +59,21 @@
 
 **Code 사용법**
 
-``` swift 
+``` swift
+    // 빌더패턴으로 필요한 설정을 추가해주세요.
     let builder = RegExBuilder()
                     .required([.english,.number,.specialSymbols]) // 필수로 포함되어야하는 설정
                     .setLength(min: 8, max: 20) // 최소 최대 글자
                     .setSpecialCharacter(#",<.>\/?;:'"\[{\]}`~₩!@#$%^&*()-_=+\|"#) // 특수문자 설정 
                     .setRegex([.english,.number]) // 포함되어야하는 설정
                     .setLogOption(.verbose) // 로그레벨
-                    
+
+    //ValidationDirector를 통해 validator 인스턴스를 생성해주세요.
     let validator = ValidationDirector.createValidator(builder: builder)
 
 
     let YOURTEXT = "123456789"
-
+    // validator 인스턴스의 isValid(String)을 통해서 유효성 검사를 진행하시면 됩니다.
     validator.isValid(YOURTEXT) { response in
         switch response {
         case .success(let success):
@@ -120,7 +124,7 @@ Add
 Select "Up to Next Major" with 0.0.1
 
 ``` swift 
-  .package(url: "https://github.com/PotatoArtie/KoreanCurrencyKit.git", .upToNextMajor(from: "0.0.1"))
+  .package(url: "https://github.com/PotatoArtie/ValidationKit.git", .upToNextMajor(from: "0.0.1"))
 ```
 
 ## Coverage
