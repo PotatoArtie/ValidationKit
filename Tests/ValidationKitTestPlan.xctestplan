@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "65EE5537-3092-4CB5-BFE9-290C963EFE3E",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "ValidationKitTests",
+        "name" : "ValidationKitTests"
+      }
+    }
+  ],
+  "version" : 1
+}
