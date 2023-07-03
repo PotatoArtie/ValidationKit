@@ -17,50 +17,60 @@
 
 ## Usage 
 
-
-- Use {String}.toKorean 
-표기방법 : 숫자 + 한글표기
-
-    ###### 소수점 앞자리 16자리까지만 화폐단위 표기 
-    최대 '조' 단위 까지 표현 
-    1,234조 5,678억 9,123만 4,567원
-
-``` swift 
-    [요청]
-    "123456780".toKorean 
-    [출력]
-    1억 2,345만 6,780원
-```
-
 - Use {String}.isValidEmail() 
 설명 : 문자열이 이메일 형식이 맞는지 확인합니다.  
 ``` swift 
     [요청]
-    "abc@abc.com".isValidEmail() 
+    "abc@abc.com".isValidEmail()
+
     [출력]
     true
 ```
 
 - Use 커스텀 정규식 생성해서 유효성 검사하기 
-사용예시 
-포함되어야하는 조건은 영어와 숫자 
-필수로 포함되어야하는 조건은 영어, 숫자, 특수문자 
-커스텀으로 특수문자 지정 
 
-포함되어야하는 조건에 특수문자가 포함되어 있지않지만 필수로 포함되어야하는 조건에 들어가 있는데
-포함되어야하는 조건 및 커스텀 특수문자가 지정을 하지않으면 기본 세팅되어진 특수문자 값을 설정  
-로그옵션 .verbose 
+<< 옵션 설명 >>
+``` swift
+    .required([.english, .number, , .korean, .specialSymbols]) // 필수로 포함되어야하는 설정
+     영어, 숫자, 한글, 특수문자 4가지 옵션을 제공합니다.
+```
+``` swift
+    .setLength(min: Int, max: Int) // 최소 최대 글자
+```
+``` swift
+    .setSpecialCharacter(#",<.>\/?;:'"\[{\]}`~₩!@#$%^&*()-_=+\|"#) // 특수문자 설정
+    #""# 포맷형식으로 특수문자열을 전달합니다. 예시를 꼭 참고해주세요.
+```
+``` swift
+    .setRegex([.english, .number, , .korean, .specialSymbols]) // 포함되어야하는 조건
+    영어, 숫자, 한글, 특수문자 4가지 옵션을 제공합니다.
+```
+``` swift
+    .setLogOption(.verbose) // 로그레벨
+```
+### 예시 조건 
+1.필수로 포함되어야하는 조건은 영어, 숫자, 특수문자
+2.입력받을 문자열의 길이의 최소길이는 8, 최대길이는 20 으로 설정
+3.커스텀으로 특수문자 지정 
+4.포함되어야하는 조건은 영어와 숫자 
+5.로그레벨 .verbose (상세한 로그 제공)
+
+**Code 사용법**
+
 ``` swift 
     let builder = RegExBuilder()
-                    .required([.english,.number,.specialSymbols]) // 필수로 포함되어야하 조건
+                    .required([.english,.number,.specialSymbols]) // 필수로 포함되어야하는 설정
                     .setLength(min: 8, max: 20) // 최소 최대 글자
                     .setSpecialCharacter(#",<.>\/?;:'"\[{\]}`~₩!@#$%^&*()-_=+\|"#) // 특수문자 설정 
-                    .setRegex([.english,.number]) // 포함되어야하는 조건 
-                    .setLogOption(.verbose) // 로그 옵션 
+                    .setRegex([.english,.number]) // 포함되어야하는 설정
+                    .setLogOption(.verbose) // 로그레벨
                     
     let validator = ValidationDirector.createValidator(builder: builder)
-    
-    validator.isValid("123123123") { response in
+
+
+    let YOURTEXT = "123456789"
+
+    validator.isValid(YOURTEXT) { response in
         switch response {
         case .success(let success):
             print(success)
@@ -69,18 +79,17 @@
         }
     }
     
-    result : 영어가 포함되어 있지 않습니다
-    
-    *사용시 주의사항* 
-    특수문자 설정시 #""# 포맷안에 특수문자 넣어서 전송하도록 
-    
+    예상 결과 : 영어가 포함되어 있지 않습니다
+
 ```
 
+### 사용시 주의사항
+특수문자 설정시 **#"{String}"#** 포맷안에 특수문자열을 전달해주세요.
+포함조건에 특수문자가 포함되어 있지 않더라도 필수로 포함되어야하는 조건을 설정하는 경우 커스텀 특수문자가 지정을 하지않으면 기본값으로 저장된 특수문자 값을 사용합니다. 
 
 
 ### Quick Help
 
-![quickhelp](https://user-images.githubusercontent.com/98959780/228849192-ba136303-fd4c-4916-b253-c6c1cb115428.gif)
 
 ## Requirement
 
@@ -115,6 +124,7 @@ Select "Up to Next Major" with 0.0.1
 ```
 
 ## Coverage
+![coverage](https://github.com/PotatoArtie/ValidationKit/assets/98959780/4d136194-e2ca-4248-947e-3cfa1da97f5b)
 
 
 ## License
