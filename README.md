@@ -123,10 +123,10 @@ watchOS - 'v3' is deprecated : **watchOS 4.0** is the oldest supported version
 
 File > Swift Packages > Add Package Dependency
 Add 
-Select "Up to Next Major" with 0.0.1
+Select "Up to Next Major" with 1.0.0
 
 ``` swift 
-  .package(url: "https://github.com/PotatoArtie/ValidationKit.git", .upToNextMajor(from: "0.0.1"))
+  .package(url: "https://github.com/PotatoArtie/ValidationKit.git", .upToNextMajor(from: "1.0.0"))
 ```
 
 ## Coverage
